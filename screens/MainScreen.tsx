@@ -10,14 +10,15 @@ import { useState } from 'react';
 import { Platform } from 'react-native';
 import QRCode from 'react-native-qrcode-generator';
 import { RootStackScreenProps } from '../types';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function MainScreen({
   navigation,
+  route,
 }: RootStackScreenProps<'Root'>) {
   const toast = useToast();
-nvm 
-  const [text, setText] = useState('');
-  const [qrCode, setQrCode] = useState('');
+  const [text, setText] = useState(route.params?.qr ?? '');
+  const [qrCode, setQrCode] = useState(route.params?.qr ?? '');
 
   return (
     <KeyboardAvoidingView
@@ -75,13 +76,13 @@ nvm
           />
         </Box>
         <Box
-          mb={10}
+          mb={5}
           flexDir={'row'}
           alignItems={'center'}
           justifyContent={'center'}
         >
           <Button
-            size={70}
+            size={50}
             width={32}
             bgColor={'#3DBCFA'}
             rounded={'full'}
@@ -91,7 +92,7 @@ nvm
             Convert
           </Button>
           <Button
-            size={70}
+            size={50}
             width={'32'}
             bgColor={'#FF9B04'}
             rounded={'full'}
@@ -102,6 +103,23 @@ nvm
             }
           >
             Share
+          </Button>
+        </Box>
+        <Box justifyContent={'center'} alignItems={'center'} mb={5}>
+          <Button
+            size={20}
+            width={20}
+            bgColor={'#FFF'}
+            color={'#00298A'}
+            rounded={'full'}
+            onPress={() => navigation.navigate('Scanner')}
+          >
+            <MaterialCommunityIcons
+              style={{ fontSize: 40 }}
+              name="qrcode-scan"
+              size={24}
+              color="black"
+            />
           </Button>
         </Box>
         <Text alignSelf={'center'} color={'white'}>
